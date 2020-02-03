@@ -32,6 +32,16 @@ namespace Cake.Git
         [CakeAliasCategory("Branches")]
         public static GitBranch GitBranchCurrent(this ICakeContext context, DirectoryPath repositoryDirectoryPath)
         {
+            if (context == null)
+            {
+                throw new InvalidOperationException($"Argument {nameof(context)} cannot be null!");
+            }
+
+            if (repositoryDirectoryPath == null)
+            {
+                throw new InvalidOperationException($"Argument {nameof(repositoryDirectoryPath)} cannot be null!");
+            }
+
             return context.UseRepository(
                 repositoryDirectoryPath,
                 repository => new GitBranch(repository)
@@ -60,6 +70,21 @@ namespace Cake.Git
         [CakeAliasCategory("Branch")]
         public static GitBranch GitCreateBranch(this ICakeContext context, DirectoryPath repositoryDirectoryPath, string branchName, bool checkOut)
         {
+            if (context == null)
+            {
+                throw new InvalidOperationException($"Argument {nameof(context)} cannot be null!");
+            }
+
+            if (repositoryDirectoryPath == null)
+            {
+                throw new InvalidOperationException($"Argument {nameof(repositoryDirectoryPath)} cannot be null!");
+            }
+
+            if (string.IsNullOrWhiteSpace(branchName))
+            {
+                throw new InvalidOperationException($"Argument {nameof(branchName)} cannot be null!");
+            }
+
             return context.UseRepository(repositoryDirectoryPath, 
                 repository => 
                 {
