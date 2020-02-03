@@ -208,6 +208,11 @@ namespace Cake.Git
                 throw new ArgumentNullException(nameof(context));
             }
 
+            if (repositoryDirectoryPath == null)
+            {
+                throw new ArgumentNullException(nameof(repositoryDirectoryPath));
+            }
+            
             if (remote == null)
             {
                 throw new ArgumentNullException(nameof(remote));
